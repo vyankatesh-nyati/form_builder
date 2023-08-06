@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import QuestionType from "../enums/QuestionType";
 import Select from "react-select";
 import CategoryTypeQuestion from "./CategoryQuestion/CategoryTypeQuestion";
@@ -8,7 +8,6 @@ import { questionsActions } from "../store/questionSlice";
 
 const QuestionEdit = ({ question }: { question: QuestionModel }) => {
   const [questionState, setQuestionState] = useState<string>(question.type);
-  const questionRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const questionType: Array<{ value: string; label: string }> = [
     {
@@ -25,32 +24,12 @@ const QuestionEdit = ({ question }: { question: QuestionModel }) => {
     },
   ];
 
-  const questionChangeHandler = () => {
-    if (questionRef.current != null) {
-      const q = questionRef.current.value;
-      dispatch(
-        questionsActions.questionChange({
-          id: question.id,
-          question: q,
-        })
-      );
-    }
-  };
-
   return (
     <div className="flex justify-center w-full p-4">
       <div className="w-2/3 bg-white rounded-xl pb-4">
         <div className="p-4">
-          <p className="mb-4">Question : </p>
           <div className="flex justify-between">
-            <input
-              type="text"
-              className="focus:outline-none border-b-2 border-x-gray-400 text-base pb-1 w-1/2 focus:border-[#176B87]"
-              placeholder="Please enter question ... ?"
-              ref={questionRef}
-              defaultValue={question.question}
-              onChange={questionChangeHandler}
-            />
+            <p className="mb-4">Question : </p>
             <Select
               options={questionType}
               className="w-2/6"
