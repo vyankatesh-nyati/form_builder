@@ -25,6 +25,8 @@ const questionSlice = createSlice({
           },
         ],
         items: [],
+        wordsArray: [],
+        options: [],
       });
     },
     setCategory(state, action) {
@@ -67,7 +69,7 @@ const questionSlice = createSlice({
         (element) => element.id === action.payload.id
       );
       if (index !== -1) {
-        state.questions[index].categories.push({
+        state.questions[index].categories?.push({
           id: uid(),
           name: "category",
         });
@@ -125,6 +127,81 @@ const questionSlice = createSlice({
       );
       if (index !== -1) {
         state.questions[index].type = action.payload.state;
+      }
+    },
+
+    //  Cloze questions functions
+    clozeSetWordsArray(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          wordsArray: Array<{ word: string; isShow: boolean }>;
+        };
+      }
+    ) {
+      const index: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.questions[index].wordsArray = action.payload.wordsArray;
+      }
+    },
+    clozeSetOptionsArray(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          optionsArray: Array<{ isExist: boolean; name: string; id: string }>;
+        };
+      }
+    ) {
+      const index: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.questions[index].options = action.payload.optionsArray;
+      }
+    },
+    clozeAddNewOption(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+        };
+      }
+    ) {
+      const index: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.questions[index].options.push({
+          name: "option",
+          isExist: false,
+          id: uid(),
+        });
+      }
+    },
+    clozeOptionNameChange(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          index: number;
+          optionName: string;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions[i].options[action.payload.index].name =
+          action.payload.optionName;
       }
     },
   },

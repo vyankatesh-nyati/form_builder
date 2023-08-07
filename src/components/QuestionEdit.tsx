@@ -5,6 +5,8 @@ import CategoryTypeQuestion from "./CategoryQuestion/CategoryTypeQuestion";
 import QuestionModel from "../interfaces/QuestionModel";
 import { useDispatch } from "react-redux";
 import { questionsActions } from "../store/questionSlice";
+import ClozeTypeQuestion from "./ClozeQuestion/ClozeTypeQuestion";
+import ComprehensiveQuestionType from "./ComprehensiveQuestion/ComprehensiveQuestionType";
 
 const QuestionEdit = ({ question }: { question: QuestionModel }) => {
   const [questionState, setQuestionState] = useState<string>(question.type);
@@ -49,6 +51,12 @@ const QuestionEdit = ({ question }: { question: QuestionModel }) => {
           </div>
           {questionState === QuestionType.Categorize && (
             <CategoryTypeQuestion question={question} />
+          )}
+          {questionState === QuestionType.Cloze && (
+            <ClozeTypeQuestion question={question} />
+          )}
+          {questionState === QuestionType.Comprehensive && (
+            <ComprehensiveQuestionType />
           )}
         </div>
       </div>
