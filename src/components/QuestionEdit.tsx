@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { questionsActions } from "../store/questionSlice";
 import ClozeTypeQuestion from "./ClozeQuestion/ClozeTypeQuestion";
 import ComprehensiveQuestionType from "./ComprehensiveQuestion/ComprehensiveQuestionType";
+import { MdDelete } from "react-icons/md";
 
 const QuestionEdit = ({ question }: { question: QuestionModel }) => {
   const [questionState, setQuestionState] = useState<string>(question.type);
@@ -28,7 +29,7 @@ const QuestionEdit = ({ question }: { question: QuestionModel }) => {
 
   return (
     <div className="flex justify-center w-full p-4">
-      <div className="w-2/3 bg-white rounded-xl pb-4">
+      <div className="w-2/3 bg-white rounded-xl pb-4 relative">
         <div className="p-4">
           <div className="flex justify-between">
             <p className="mb-4">Question : </p>
@@ -56,8 +57,16 @@ const QuestionEdit = ({ question }: { question: QuestionModel }) => {
             <ClozeTypeQuestion question={question} />
           )}
           {questionState === QuestionType.Comprehensive && (
-            <ComprehensiveQuestionType />
+            <ComprehensiveQuestionType question={question} />
           )}
+        </div>
+        <div
+          className="absolute right-4 bottom-4 text-xl text-red-500 p-1 rounded-[50%] cursor-pointer"
+          onClick={() => {
+            dispatch(questionsActions.removeQuestion({ id: question.id }));
+          }}
+        >
+          <MdDelete />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import EditPage from "./pages/Edit";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-[#DAFFFB] min-h-screen">
       <EditPage />
     </div>
   );

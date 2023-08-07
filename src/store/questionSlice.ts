@@ -27,6 +27,8 @@ const questionSlice = createSlice({
         items: [],
         wordsArray: [],
         options: [],
+        comprehension: "",
+        comprehnesionQuestions: [],
       });
     },
     setCategory(state, action) {
@@ -202,6 +204,122 @@ const questionSlice = createSlice({
       if (i !== -1) {
         state.questions[i].options[action.payload.index].name =
           action.payload.optionName;
+      }
+    },
+
+    // comprehnesion question
+    comprehensionSetComprehension(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          sentence: string;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions[i].comprehension = action.payload.sentence;
+      }
+    },
+    comprehensionAddNewQuestion(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions[i].comprehnesionQuestions.push({
+          id: uid(),
+          question: "",
+          options: ["option1", "option2", "option3", "option4"],
+          answer: "option1",
+        });
+      }
+    },
+    comprehensionChangeQuestion(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          question: string;
+          index: number;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions[i].comprehnesionQuestions[
+          action.payload.index
+        ].question = action.payload.question;
+      }
+    },
+    comprehensionOnChangeOption(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          option: string;
+          questionIndex: number;
+          optionIndex: number;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions[i].comprehnesionQuestions[
+          action.payload.questionIndex
+        ].options[action.payload.optionIndex] = action.payload.option;
+      }
+    },
+    comprehensionOnSaveAnswer(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          answer: string;
+          index: number;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions[i].comprehnesionQuestions[action.payload.index].answer =
+          action.payload.answer;
+      }
+    },
+    removeQuestion(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+        };
+      }
+    ) {
+      const i: number = state.questions.findIndex(
+        (element) => element.id === action.payload.id
+      );
+      if (i !== -1) {
+        state.questions.splice(i, 1);
       }
     },
   },

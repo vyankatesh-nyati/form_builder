@@ -18,7 +18,7 @@ const EditPage = () => {
   };
 
   return (
-    <div className="bg-[#DAFFFB] pb-4">
+    <div className="pb-4">
       <Navbar />
       <TitleComponent />
       {questions.map((question) => {
