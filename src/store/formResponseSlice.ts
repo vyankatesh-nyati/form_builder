@@ -112,12 +112,33 @@ const formResponseSlice = createSlice({
         const i = state.answers[index].solution.findIndex(
           (s) => s.categoryId === action.payload.categoryId
         );
-        console.log(i);
         if (i !== -1) {
           state.answers[index].solution[i].categoryItems.push(
             action.payload.item
           );
         }
+      }
+    },
+    clozeAddAnswer(
+      state,
+      action: {
+        type: string;
+        payload: {
+          id: string;
+          option: string;
+        };
+      }
+    ) {
+      const index: number = state.answers.findIndex(
+        (element) => element.questionId === action.payload.id
+      );
+      if (index !== -1) {
+        state.answers[index].solution.push(action.payload.option);
+      } else {
+        state.answers.push({
+          questionId: action.payload.id,
+          solution: [action.payload.option],
+        });
       }
     },
   },

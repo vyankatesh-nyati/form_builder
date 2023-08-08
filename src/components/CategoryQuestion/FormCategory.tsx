@@ -118,7 +118,7 @@ const FormCategory: React.FC<props> = ({ question, index }) => {
                         <p>{cItem.categoryName}</p>
                       </div>
                       <div className="h-20">
-                        {cItem.categoryItems.map((it: any) => {
+                        {cItem.categoryItems.map((it: any, index: number) => {
                           return (
                             <p
                               key={it.id}

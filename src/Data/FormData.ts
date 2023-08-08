@@ -45,5 +45,54 @@ export const formData: FormModel = {
       question: "",
       wordsArray: [],
     },
+    {
+      id: "3e6423c1036",
+      type: "Cloze",
+      question: "",
+      categories: [
+        {
+          id: "e6423c10369",
+          name: "category",
+        },
+      ],
+      items: [],
+      wordsArray: [
+        {
+          word: "How",
+          isShow: true,
+        },
+        {
+          word: "are",
+          isShow: false,
+        },
+        {
+          word: "you",
+          isShow: false,
+        },
+        {
+          word: "?",
+          isShow: true,
+        },
+      ],
+      options: [
+        {
+          isExist: true,
+          name: "are",
+          id: "6423c103694",
+        },
+        {
+          name: "Hello ",
+          isExist: false,
+          id: "23c1036948b",
+        },
+        {
+          isExist: true,
+          name: "you",
+          id: "423c1036948",
+        },
+      ],
+      comprehension: "",
+      comprehnesionQuestions: [],
+    },
   ],
 };
