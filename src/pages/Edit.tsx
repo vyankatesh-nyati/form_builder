@@ -1,6 +1,5 @@
 import React from "react";
 import TitleComponent from "../components/TitleComponent";
-import Navbar from "../components/common/Navbar";
 import QuestionEdit from "../components/QuestionEdit";
 import { GrAddCircle } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +18,6 @@ const EditPage = () => {
 
   return (
     <div className="pb-4">
-      <Navbar />
       <TitleComponent />
       {questions.map((question) => {
         return <QuestionEdit question={question} key={question.id} />;
