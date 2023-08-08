@@ -138,3 +138,4 @@ const FormCloze: React.FC<props> = ({ question, index }) => {
 };
 
 export default FormCloze;
+   
