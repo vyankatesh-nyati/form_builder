@@ -41,13 +41,7 @@ const AllForms: React.FC = () => {
         return (
           <div key={res._id} className="bg-white w-2/3 p-4">
             <p>Form Id: {res.formId}</p>
-            {res.responses.map((fr: any) => {
-              return (
-                <div key={fr._id}>
-                  <p>{fr}</p>
-                </div>
-              );
-            })}
+            <p>Total Responses: {res.responses.length}</p>
           </div>
         );
       })}
