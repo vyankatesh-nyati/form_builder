@@ -8,6 +8,7 @@ import QuestionModel from "../interfaces/QuestionModel";
 import { serverUrl } from "../config/server";
 import Loader from "../components/common/Loader";
 import Response from "../components/Response";
+import Error from "../components/common/Error";
 
 const EditPage = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const EditPage = () => {
   const title = useSelector((state: any) => state.title.title);
   const [isLoading, setIsLoading] = useState(false);
   const [responseLink, setResponseLink] = useState("");
-  // console.log(location);
+  const [error, setError] = useState("");
 
   const addNewQuestion = () => {
     dispatch(questionsActions.addNewQuestion());
@@ -45,37 +46,44 @@ const EditPage = () => {
         setResponseLink(`/form/${data.id}`);
         // setResponse(true);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log(error.message.toString());
+      setError(error.message.toString());
     }
     setIsLoading(false);
   };
 
   return (
-    <div className="pb-4 relative">
-      {responseLink !== "" ? <Response link={responseLink} /> : null}
-      {isLoading ? (
-        <Loader />
+    <div className="pb-4 relative flex flex-col">
+      {error !== "" ? <Error error={error} /> : null}
+      {responseLink !== "" ? (
+        <Response link={responseLink} />
       ) : (
         <>
-          <TitleComponent />
-          {questions.map((question) => {
-            return <QuestionEdit question={question} key={question.id} />;
-          })}
-          <div className="flex justify-center">
-            <div className="flex items-center gap-4 justify-end text-2xl w-2/3">
-              <GrAddCircle
-                className="text-[#001C30] cursor-pointer"
-                onClick={addNewQuestion}
-              />
-              <button
-                className="text-base bg-[#176B87] p-1 px-4 rounded-md text-white mr-2"
-                onClick={onFormCreateHandler}
-              >
-                Create Form
-              </button>
-            </div>
-          </div>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <TitleComponent />
+              {questions.map((question) => {
+                return <QuestionEdit question={question} key={question.id} />;
+              })}
+              <div className="flex justify-center">
+                <div className="flex items-center gap-4 justify-end text-2xl w-2/3">
+                  <GrAddCircle
+                    className="text-[#001C30] cursor-pointer"
+                    onClick={addNewQuestion}
+                  />
+                  <button
+                    className="text-base bg-[#176B87] p-1 px-4 rounded-md text-white mr-2"
+                    onClick={onFormCreateHandler}
+                  >
+                    Create Form
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

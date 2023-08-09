@@ -43,7 +43,11 @@ const FormComprehensive: React.FC<props> = ({ question, index }) => {
                 }}
               >
                 {ques.options.map((op) => {
-                  return <Radio value={op}>{op}</Radio>;
+                  return (
+                    <Radio value={op} key={op}>
+                      {op}
+                    </Radio>
+                  );
                 })}
               </Radio.Group>
             </div>

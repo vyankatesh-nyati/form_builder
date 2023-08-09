@@ -10,7 +10,9 @@ const Response: React.FC<props> = ({ link }) => {
   const location = window.location.origin;
 
   const onCLickHandler = () => {
-    navigate(link);
+    navigate(link, {
+      replace: true,
+    });
   };
 
   return (

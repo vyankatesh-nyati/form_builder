@@ -3,6 +3,7 @@ import EditPage from "./pages/Edit";
 import AllForms from "./pages/AllForms";
 import Layout from "./Layout";
 import Form from "./pages/Form";
+import Submit from "./pages/Submit";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: "/create-new-form",
         element: <EditPage />,
+      },
+      {
+        path: "/submit",
+        element: <Submit />,
       },
     ],
   },
