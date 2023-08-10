@@ -36,7 +36,7 @@ const AllForms: React.FC = () => {
   }, [fetchFormResponseData]);
 
   return (
-    <div className="flex items-center justify-center gap-4 py-4">
+    <div className="flex items-center justify-center gap-4 py-4 flex-col">
       {formReponses.map((res: any) => {
         return (
           <div key={res._id} className="bg-white w-2/3 p-4">
